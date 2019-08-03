@@ -64,7 +64,7 @@ public class NotificationDao{
 	public User find(String s) {
 		System.out.println(s);
 		String sql="select * from mobiquityuserreg where name=?";  
-	    return template.queryForObject(sql, new Object[]{s},new UserMapper());
+	    return (User)template.queryForObject(sql, new Object[]{s},new UserMapper());
 	    }
 	
 	public int approve(User obj) {
