@@ -18,7 +18,7 @@
             <!-- Links -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8082/Inbox/empform/registernewform">Create User</a>
+                <a class="nav-link" href="/Inbox/empform/registernewform">Create User</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/Inbox/save/viewnotf">Inbox</a>
@@ -73,11 +73,11 @@
                         <input class="form-control" id="myInput" type="text" placeholder="Search..">
                       </div>
                       <div class="col-sm-5">
-                              <button type="button" class="btn btn-default btn-lg " style="background-color:#F88C4E"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\search.svg"/></button>
-                              <button type="button" class="btn btn-default btn-lg delete" style="background-color:#F88C4E"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\trashcan.svg"/></button>
-                              <button type="button" class="btn btn-default btn-lg archive" style="background-color:#F88C4E"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\archive.svg"/></span></button>
-                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\chevron-left.svg"/></button>
-                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\chevron-right.svg"/></button>
+                              <button type="button" class="btn btn-default btn-lg " style="background-color:#F88C4E"><img src="\Inbox\svg\search.svg"/></button>
+                              <button type="button" class="btn btn-default btn-lg delete" style="background-color:#F88C4E"><img src="\Inbox\svg\trashcan.svg"/></button>
+                              <button type="button" class="btn btn-default btn-lg archive" style="background-color:#F88C4E"><img src="\Inbox\svg\archive.svg"/></span></button>
+                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="\Inbox\svg\chevron-left.svg"/></button>
+                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="\Inbox\svg\chevron-right.svg"/></button>
                       </div>
                     </div>
                  
@@ -159,8 +159,8 @@
         	$(".close").click(function(){
         		var item = document.getElementById("sub").innerHTML;
         		//item = item.replace(/\s+/g,' ').trim();
-        		serial = parseInt(item.split(" ")[2]);
-        		//document.write("/Inbox/viewnotf/read/"+item.split(" ")[2]);
+        		serial = parseInt(item.split(" ")[3]);
+        		//document.write(serial);
         /* 	item = item.replace(/\s+/g,' ').trim(); */
         		javascript:window.location.href="/Inbox/save/read/"+serial;
         location.reload();
