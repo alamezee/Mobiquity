@@ -7,6 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.mobiquity.bean.User;
 
+/**
+ * For find functionality of NotificationDao class
+ */
 
 public class UserMapper implements RowMapper
 {

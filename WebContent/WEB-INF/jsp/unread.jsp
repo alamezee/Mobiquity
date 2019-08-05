@@ -4,14 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="control.css"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <% 
-
 response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
 if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empform");}
 %>
@@ -32,15 +30,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 <a class="nav-link signout" href="/Inbox/empform">Signout</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0"  >
-  				<div class="input-group" style="float:right">
-    				<input class="form-control" type="search" placeholder="Search">
-    <div class="input-group-append">
-      <div class="input-group-text"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\search.svg"/></div>
-      
-    </div>
-  </div>
-</form>
+           
 <p class="adminname ml-auto" style="color:white;"><i>logged in as: </</i><b>${adminDetail}</b></p>
 
         </nav>
@@ -81,8 +71,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                               <button type="button" class="btn btn-default btn-lg " style="background-color:#F88C4E"><img src="\Inbox\svg\search.svg"/></button>
                               <button type="button" class="btn btn-default btn-lg delete" style="background-color:#F88C4E"><img src="\Inbox\svg\trashcan.svg"/></button>
                               <button type="button" class="btn btn-default btn-lg archive" style="background-color:#F88C4E"><img src="\Inbox\svg\archive.svg"/></span></button>
-                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="\Inbox\svg\chevron-left.svg"/></button>
-                              <button type="button" class="btn btn-default btn-lg" style="background-color:#F88C4E"><img src="\Inbox\svg\chevron-right.svg"/></button>
+                             
                       </div>
                     </div>
                  

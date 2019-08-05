@@ -1,9 +1,17 @@
 package com.mobiquity.bean;
 
+
+/**
+ * Bean Class for User
+ */
+
+
 public class User {
+	//Field Names
 	private String name, email, mobile, adminlevel, newpassword;
 	private boolean approval;
 	
+	//All Getters and Setters
 	public boolean isApproval() {
 		return approval;
 	}

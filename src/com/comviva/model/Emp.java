@@ -1,7 +1,14 @@
 package com.comviva.model;  
   
+
+/**
+ * Bean Class
+ */
+
+
 public class Emp 
 {  
+	//Field Names
 private String username;
 private String password;
 private int adminid;
@@ -11,6 +18,8 @@ private String mobile;
 private String email;
 private String newpassword;
 private String adminlevel;
+
+//All Getters and Setters
 
 public int getAdminid() {
 	return adminid;

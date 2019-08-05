@@ -104,12 +104,10 @@ public class EmpController {
     	List<Emp> list=dao.getEmployees(emp); 
         if(list.isEmpty())
         {
-        System.out.println("failure");
         return "failure"; 
         }
         else
         {
-        System.out.println("success");
         return "redirect:/save/viewnotf";
         }
     } 

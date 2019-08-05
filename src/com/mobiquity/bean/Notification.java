@@ -3,7 +3,13 @@ package com.mobiquity.bean;
 import java.sql.Time;
 import java.sql.Date;
 
+/**
+ * Bean Class for Notification
+ */
+
+
 public class Notification {
+	//Field Names
 	private String sender,subject, content;
 	private Date date;
 	private Time time;
@@ -11,6 +17,7 @@ public class Notification {
 	public int serial;
 	public boolean delete, archive;
 	
+	//All Getters and Setters
 	public void setSender(String send) {
 		this.sender= send;
 	}

@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="control.css"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -30,15 +29,7 @@
                 <a class="nav-link" href="/Inbox/empform">Signout</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0"  >
-  				<div class="input-group" style="float:right">
-    				<input class="form-control" type="search" placeholder="Search">
-    <div class="input-group-append">
-      <div class="input-group-text"><img src="D:\eclipse-workspace\Inbox\WebContent\WEB-INF\jsp\svg\search.svg"/></div>
-      
-    </div>
-  </div>
-</form>
+           
 
         </nav>
 		
@@ -54,19 +45,22 @@
                             <form:form method="post" action="newreg" >  
                                     <div class="form-group">
                                             <label >Username:</label>
-                                            <form:input    class="form-control usn"  placeholder="Enter username" path="name"/>
+                                            <form:input   type="text" class="form-control usn"  placeholder="Enter username" path="name" required="true"/>
                                           </div>
                                           <div class="form-group">
                                                 <label >Mobile:</label>
-                                                <form:input class="form-control"  placeholder="Enter Mobile" path="mobile"/>
+                                                <form:input type="tel" pattern="^\d{10}$" title="Enter 10 digit number" class="form-control"  placeholder="Enter Mobile" path="mobile" required="true"/>
+                                                <div class="invalid-feedback">  
+                                            Please enter 10 digit mobile number.  
+                                        </div> 
                                               </div>
                                               <div class="form-group">
                                                     <label>Email:</label>
-                                                    <form:input type="email" class="form-control"  placeholder="Enter email"  path="email"/>
+                                                    <form:input type="email" class="form-control"  placeholder="Enter email"  path="email" required="true"/>
                                                   </div>
                                                   <div class="form-group">
                                                         <label>Password:</label>
-                                                        <form:input type="password" class="form-control" placeholder="Enter password" path="newpassword"/>
+                                                        <form:input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="Enter UpperCase, LowerCase and Number" class="form-control" placeholder="Enter password" path="newpassword" required="true"/>
                                                       </div>
                                                       <label>Select Admin Level:</label>
                                                       <form:select name="levels" class="custom-select mb-3" path="adminlevel" placeholder="Select Admin Level">

@@ -24,7 +24,12 @@ import com.comviva.model.Emp;
 import com.mobiquity.bean.User;
 import com.mobiquity.dao.UserMapper;  
  
-
+/**
+ * DAO Class
+ * Data Access Object 
+ * To access the required data from the database.
+ * 
+ */
 
 public class EmpDao {  
 	
@@ -40,6 +45,14 @@ public static String maker;
 public static int adminid;
 public static String makerLevel;
 
+/**
+ * Generates Checker Notification for approval of new user to all Admins above and equal to that of maker admin.
+ * @param makerLevel
+ * @param contentjava contains other information like email,phone number,etc.
+ * @param makerusername
+ */
+
+
 public void createCheckerNotifications( final String makerLevel, final String contentjava,final String makerusername) {
 	
     template.query("select username,adminLevel,adminid from admins",new RowMapper<Emp>()
@@ -49,15 +62,10 @@ public void createCheckerNotifications( final String makerLevel, final String co
             String username = rs.getString(1);
             String adminLevel = rs.getString(2);
             int id=rs.getInt(3);
-            //System.out.println(adminLevel);
-            //System.out.println(makerLevel);
             
             
             if(level.valueOf(adminLevel).ordinal() >= level.valueOf(makerLevel).ordinal() && !(username.equals(makerusername)))
             {
-            	System.out.println(username);
-	            System.out.println(makerLevel);
-	            System.out.println(adminLevel);
            	 //date
            	 DateFormat df = new SimpleDateFormat("dd/MM/yy");
            	 Date dateobj = new Date();
@@ -78,11 +86,19 @@ public void createCheckerNotifications( final String makerLevel, final String co
     }  );
 }
 
+/**
+ * Saves new Channel Admin or Network Admin after checker approval in admins table
+ * and also raise Notification regarding raised request on maker's side.
+ * @param p Object of Emp Class
+ * @return status of template update query , i.e, query is executed in orginal database.
+ * @throws Exception
+ */
+
+
 public int newreg(Emp p) throws Exception
 {
 	
 	//password encryption
-	System.out.println(p.getName()+p.getNewpassword()+p.getAdminlevel());
 	MessageDigest md = MessageDigest.getInstance("SHA-256"); 
     byte[] messageDigest = md.digest(p.getNewpassword().getBytes()); 
     BigInteger no = new BigInteger(1, messageDigest); 
@@ -110,23 +126,23 @@ public int newreg(Emp p) throws Exception
 	 String s2=p.getEmail();
 	 String s3=p.getMobile();
 	 final String contentjava_maker=(" "+p.getName()+" "+p.getEmail()+" "+p.getMobile()+" ");
-	 //final String contentjava_checker=(" Name : "+p.getName()+"<br> Email Id:  "+p.getEmail()+"<br> Mobile No: "+p.getMobile()+"<br>");
-	 System.out.println(adminid);
-	 System.out.println(maker);
-	 
 	 String maker1="'"+maker+"'";
-	 System.out.println(maker1);
 	 int id1=adminid;
 	 String sub= "You have raised the following request ";
 	 String sqlnotify ="insert into notifications(sender,subject,content,date,time,checker_id) values('"+maker+"','"+sub+"','"+contentjava_maker+"','"+ datejava+"','"+timejava+"',"+id1+")";
 	 template.update(sqlnotify);
 	 final String adminlevel=p.getAdminlevel();
-	 System.out.println("Admin level of Maker is"+adminlevel);
 	 createCheckerNotifications(makerLevel,contentjava_maker,maker);
 	 
 	 return template.update(sql);
 }
 
+/**
+ * Loads Notifications from Notification Database into front end of particular user
+ * @param p
+ * @return
+ * @throws Exception
+ */
 
 
 public List<Emp> getEmployees(Emp p) throws Exception
@@ -143,6 +159,8 @@ public List<Emp> getEmployees(Emp p) throws Exception
 	    { 
 	        passwordent = "0" + passwordent; 
 	    } 
+	  //query for selecting particular user 
+	    //for getting admin id and maker
 	    		
 	    		   template.query("select * from admins where STRCMP(username,\"" + p.getUsername()+"\") = 0",new RowMapper<Emp>()
 	    		    {  
@@ -159,7 +177,7 @@ public List<Emp> getEmployees(Emp p) throws Exception
 	    		        }  
 	    		    }  );
 	    
-	   
+	    		   //query for getting one particular Admin (ca,na,sa)
     return template.query("select username,password from admins where STRCMP(username,\"" + p.getUsername()+"\") = 0 and STRCMP(password,\""+passwordent+"\")= 0",new RowMapper<Emp>()
     {  
         public Emp mapRow(ResultSet rs, int row) throws SQLException 
@@ -167,14 +185,12 @@ public List<Emp> getEmployees(Emp p) throws Exception
             Emp e=new Emp();  
             e.setUsername(rs.getString(1));  
             e.setPassword(rs.getString(2)); 
-            System.out.println(e.getPassword());
             return e;
         }  
     }  );
 } 
 
 public int find(String s) {
-	//System.out.println(s);
 	String sql="select * from mobiquityuserreg where name=?";  
 	try {
    User temp = (User)template.queryForObject(sql, new Object[]{s},new UserMapper());
