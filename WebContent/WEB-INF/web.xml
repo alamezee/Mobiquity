@@ -23,5 +23,6 @@ maps the links to their respective source codes -->
 <servlet-mapping>    
     <servlet-name>spring-2</servlet-name>    
     <url-pattern>/save/*</url-pattern>    
-</servlet-mapping>    
+</servlet-mapping> 
+
 </web-app>  
