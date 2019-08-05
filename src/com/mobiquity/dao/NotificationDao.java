@@ -75,6 +75,9 @@ public class NotificationDao{
 		String level = obj.getLevel();
 		System.out.println(level);
 		String sql="insert into admins(username, password,adminLevel) values('"+name+"','"+pass+"','"+level+"')";  
+	    
+	    String sql1="update mobiquityuserreg set `approval`=? where name=?;";
+	    template.update(sql1,true,obj.getUserName());
 	    return template.update(sql);  
 	}
 
@@ -83,6 +86,11 @@ public class NotificationDao{
 	public String getAdminDetail() {
 		
 		return obj1.maker;
+	}
+	
+public void setAdminDetail() {
+		System.out.println("signout");
+		 obj1.maker=null;
 	}
 	
 }

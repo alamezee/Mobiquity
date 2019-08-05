@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <head>
+  
 	<title>Create New User</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+ 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
@@ -39,8 +41,7 @@
 </form>
 
         </nav>
-
-
+		
         <div class="container-fluid">
                 <!-- Control the column width, and how they should appear on different devices -->
                 <div class="row">
@@ -49,10 +50,11 @@
   
                      <div class="container .mx-auto" style="width=40%; min-width:150pt; ">
                             <h2>New User Registration </h2>
-                            <form:form method="post" action="newreg">  
+                            
+                            <form:form method="post" action="newreg" >  
                                     <div class="form-group">
                                             <label >Username:</label>
-                                            <form:input  class="form-control"  placeholder="Enter username" path="name"/>
+                                            <form:input    class="form-control usn"  placeholder="Enter username" path="name"/>
                                           </div>
                                           <div class="form-group">
                                                 <label >Mobile:</label>
@@ -72,8 +74,33 @@
                                                             <option value="ca" selected>Channel Admin</option>
                                                           </form:select>
 
-                              <br><input type="submit" class="btn btn-primary" value="Save" style="align-content: center">
+                              <br><input type="submit" class="btn btn-primary save" value="Save" style="align-content: center">
                             </form:form>
-                          </div>
-          
+                        
+            </div>
+         
     </body>  
+ 
+ 
+ <script type="text/javascript">
+ 
+ //var queryString=location.search;
+ $(document).ready(function() {
+	
+	 //var urlprams = new URLSearchParams(location.search);
+	// var x=urlprams.get('pop');
+	var x=window.location.href;
+	
+	 var y=x[x.length-1];
+	 
+	 if(y==1)
+		 {
+		 alert("Username already exists");
+		 }
+	 if(y==2)
+	 {
+	 alert("Success");
+	 }
+     });
+ 
+</script>

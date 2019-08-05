@@ -17,6 +17,7 @@ public class UserMapper implements RowMapper
 		usr.setPassword(rs.getString(4));
 		usr.setMobile(rs.getString(2));
 		usr.setLevel(rs.getString(5));
+		usr.setApproval(rs.getBoolean(6));
 		return usr;
 	}
 	

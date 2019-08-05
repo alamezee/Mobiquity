@@ -26,6 +26,14 @@ public class notfcontroller {
 	        return "viewnotf";
 	 }
 	 
+	 @RequestMapping("/logout")
+	public String  logout(Model m) {
+		//m.addAttribute("adminDetail",null);
+		notf.setAdminDetail();
+		return "redirect: /Inbox/empform";
+	}
+
+	
 	 @RequestMapping(value="/read/{serial}")
 	 public String markread(@PathVariable int serial, Model m) {
 		 System.out.println(serial);

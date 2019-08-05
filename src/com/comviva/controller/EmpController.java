@@ -1,5 +1,11 @@
 package com.comviva.controller;   
-import java.util.List;  
+import java.util.List;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +20,7 @@ import com.comviva.model.Emp;
   
 @Controller  
 public class EmpController {  
+	//String pop="";
     @Autowired  
     EmpDao dao; 
         
@@ -35,16 +42,29 @@ public class EmpController {
     }
     
     @RequestMapping(value="newreg",method = RequestMethod.POST)  
-    public String newreg(@ModelAttribute("emp") Emp emp) throws Exception
+    public String newreg(@ModelAttribute("emp") Emp emp, Model m) throws Exception
     {
-    	dao.newreg(emp);
-    	return "redirect:/save/viewnotf";
+    	if(dao.find(emp.getName())==1) {
+//    		String pop = "Username already exists";
+    		int pop=1;
+    		m.addAttribute("pop",pop);
+    		return "redirect:/empform/registernewform";
+    	}
+    	else {
+//    		String pop = "Success";
+    		int pop=2;
+
+    		m.addAttribute("pop",pop);
+    		dao.newreg(emp);
+        	return "redirect:/save/viewnotf";
+    	}
+    	
     }
     @RequestMapping(value="/save",method = RequestMethod.POST)  
-    public String save(@ModelAttribute("emp") Emp emp) throws Exception
+    public String save(@ModelAttribute("emp") Emp emp, HttpServletRequest request, HttpServletResponse response) throws Exception
     {
 		
-		 
+		 HttpSession session=request.getSession();
     	List<Emp> list=dao.getEmployees(emp); 
         if(list.isEmpty())
         {

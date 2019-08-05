@@ -2,7 +2,14 @@ package com.mobiquity.bean;
 
 public class User {
 	private String name, email, mobile, adminlevel, newpassword;
+	private boolean approval;
 	
+	public boolean isApproval() {
+		return approval;
+	}
+	public void setApproval(boolean approval) {
+		this.approval = approval;
+	}
 	public void setUserName( String name) {
 		this.name=name;
 		

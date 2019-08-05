@@ -1,6 +1,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <head>
+<% 
+
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+%>
   <title>Home</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

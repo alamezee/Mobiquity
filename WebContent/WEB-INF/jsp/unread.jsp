@@ -10,6 +10,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<% 
+
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empform");}
+%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
@@ -24,7 +29,7 @@
                 <a class="nav-link" href="/Inbox/save/viewnotf">Inbox</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"href="/Inbox/empform">Signout</a>
+                <a class="nav-link signout" href="/Inbox/empform">Signout</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0"  >
@@ -225,6 +230,13 @@
         	location.reload();
         	});
         });
-        	
+        $(document).ready(function($) {
+            $(".signout").click(function() {
+                //location.reload)();
+                javascript: window.location.href = "/Inbox/save/logout";
+
+                //document.write(adminDetail);
+            });
+        });
             </script>
     </body>  

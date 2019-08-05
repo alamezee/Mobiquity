@@ -18,7 +18,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException;
 
-import com.comviva.model.Emp;  
+import com.comviva.model.Emp;
+import com.mobiquity.bean.User;
+import com.mobiquity.dao.UserMapper;  
  
 
 
@@ -34,7 +36,7 @@ enum level{ ca , na, sa}
 
 public static String maker;
 public static int adminid;
-
+public static String makerLevel;
 
 public void createCheckerNotifications( final String makerLevel, final String contentjava,final String makerusername) {
 	
@@ -52,7 +54,8 @@ public void createCheckerNotifications( final String makerLevel, final String co
             if(level.valueOf(adminLevel).ordinal() >= level.valueOf(makerLevel).ordinal() && !(username.equals(makerusername)))
             {
             	System.out.println(username);
-	            //System.out.println(maker);
+	            System.out.println(makerLevel);
+	            System.out.println(adminLevel);
            	 //date
            	 DateFormat df = new SimpleDateFormat("dd/MM/yy");
            	 Date dateobj = new Date();
@@ -88,7 +91,7 @@ public int newreg(Emp p) throws Exception
         hashtext = "0" + hashtext; 
     } 
    
-	String sql="insert into mobiquityuserreg values('"+p.getName()+"','"+p.getMobile()+"','"+p.getEmail()+"',"+"'"+hashtext+"','"+p.getAdminlevel()+"')";
+	String sql="insert into mobiquityuserreg values('"+p.getName()+"','"+p.getMobile()+"','"+p.getEmail()+"',"+"'"+hashtext+"','"+p.getAdminlevel()+"',"+false+")";
 	 
 	
 	 //storing data in the notification table
@@ -116,7 +119,8 @@ public int newreg(Emp p) throws Exception
 	 String sqlnotify ="insert into notifications(sender,subject,content,date,time,checker_id) values('"+maker+"','"+sub+"','"+contentjava_maker+"','"+ datejava+"','"+timejava+"',"+id1+")";
 	 template.update(sqlnotify);
 	 final String adminlevel=p.getAdminlevel();
-	 createCheckerNotifications(adminlevel,contentjava_maker,maker);
+	 System.out.println("Admin level of Maker is"+adminlevel);
+	 createCheckerNotifications(makerLevel,contentjava_maker,maker);
 	 
 	 return template.update(sql);
 }
@@ -138,15 +142,17 @@ public List<Emp> getEmployees(Emp p) throws Exception
 	        passwordent = "0" + passwordent; 
 	    } 
 	    		
-	    		   template.query("select adminid,username from admins where STRCMP(username,\"" + p.getUsername()+"\") = 0",new RowMapper<Emp>()
+	    		   template.query("select * from admins where STRCMP(username,\"" + p.getUsername()+"\") = 0",new RowMapper<Emp>()
 	    		    {  
 	    		        public Emp mapRow(ResultSet rs, int row) throws SQLException 
 	    		        {  
 	    		            Emp e=new Emp();  
 	    		            e.setAdminid(rs.getInt(1));
 	    		            e.setUsername(rs.getString(2));
+	    		            e.setAdminlevel(rs.getString(4));
 	    		            adminid=e.getAdminid();
 	    		            maker=e.getUsername();
+	    		            makerLevel=e.getAdminlevel();
 	    		            return e;
 	    		        }  
 	    		    }  );
@@ -163,5 +169,18 @@ public List<Emp> getEmployees(Emp p) throws Exception
             return e;
         }  
     }  );
-}  
+} 
+
+public int find(String s) {
+	//System.out.println(s);
+	String sql="select * from mobiquityuserreg where name=?";  
+   User temp= (User)template.queryForObject(sql, new Object[]{s},new UserMapper());
+    if(s.equals(temp.getUserName())) {
+    	return 1;
+    }
+    else
+    	return 0;
+    
+    }
+
 }  
