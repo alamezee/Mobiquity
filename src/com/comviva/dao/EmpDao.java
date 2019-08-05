@@ -2,7 +2,9 @@ package com.comviva.dao;
 import java.sql.ResultSet;   
 import java.sql.SQLException;
 import java.sql.*;
-import java.util.*;  
+import java.util.*;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;  
 import org.springframework.jdbc.core.JdbcTemplate;  
 import org.springframework.jdbc.core.RowMapper;
@@ -174,7 +176,8 @@ public List<Emp> getEmployees(Emp p) throws Exception
 public int find(String s) {
 	//System.out.println(s);
 	String sql="select * from mobiquityuserreg where name=?";  
-   User temp= (User)template.queryForObject(sql, new Object[]{s},new UserMapper());
+	try {
+   User temp = (User)template.queryForObject(sql, new Object[]{s},new UserMapper());
     if(s.equals(temp.getUserName())) {
     	return 1;
     }
@@ -182,5 +185,10 @@ public int find(String s) {
     	return 0;
     
     }
+
+	catch (EmptyResultDataAccessException e) {
+	return 0 ;
+	}	
+}
 
 }  
