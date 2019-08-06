@@ -151,7 +151,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 </div>
             </div>
             <script type="text/javascript">
-                <!-- to unbold read notifications -->
+                <!-- to search notifications using pattern matching -->
                 $(document).ready(function() {
                     $("#myInput").on("keyup", function() {
                         var value = $(this).val().toLowerCase();
