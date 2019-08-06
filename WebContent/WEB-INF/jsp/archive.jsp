@@ -9,6 +9,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<!--  -->
+        <!-- to clear cache of the page -->
 <% 
 response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
 if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empform");}
@@ -41,7 +43,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 <div class="row">
                   <div class="col-sm-2" data-toggle="collapse" href="#options" style="background-color:#F88C4E; border:2%; min-height:100pt; padding:10pt;">
                     <div class="container">
-                            
+                          <!-- Nav for archive -->   
                             <div>
                                     <ul class="nav flex-column" style="color: beige;">
                                       <li class="nav-item">
@@ -60,7 +62,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                             </div>
                           
                 </div>
-                
+                <!-- Inbox options for notification operations -->
                   <div class="col-sm-10 sc" style="background-color:rgb(204, 204, 204); border:2%; min-height:100pt;">
                     <h2 style="margin-left:15px;margin-top:10px">Archive</h2>
                     <div class="container row">
@@ -74,10 +76,12 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                              
                       </div>
                     </div>
-                 
+                 	<!-- Notification tab format and loading from list  -->
                          <table class="table table-inbox table-hover myclass" id="myTable">
                       <tbody>
+		      <!-- for loop to iterate list -->
                       <c:forEach var="msg" items="${list}">
+		      <!-- archived messages -->
                       <c:if test="${ msg.delete==false && msg.archive==true}">
                         <tr >
                             <td class="inbox-small-cells">
@@ -99,6 +103,7 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                   </div>
                 </div>
         </div>
+	<!-- Dialog box -->
         <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
@@ -119,8 +124,8 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 </div>
               </div>
         <script type="text/javascript">
-       
-
+		
+	<!-- to search notifications using pattern matching -->
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -129,54 +134,41 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
             });
           });
         });
-        
+		
+        <!-- dialog box content -->
         $(document).ready(function($){
         	$(".table-row").click(function(){
         		var item = $(this).closest("tr").text();
         		item = item.replace(/\s+/g,' ').trim();
-        		
-        		//document.write($item);
-        		//javascript:window.location.href="/read"
-        		//serial = item.split(" ",1);
-        	 temp = item.split(" ");
-        	
-     		
+        	 	temp = item.split(" ");
         		document.getElementById("sub").innerHTML=" Notification ID: "+temp[0]+"<br>"+" Sender: "+ temp[1]+"<br>"+temp[2]+ " " + temp[3]+"<br>"+
-        		" Name: "+ temp[4]+" <br>"+" Email : "+temp[temp.length-4]+"<br>"+" Mobile : "+temp[temp.length-3] ;
-        		
-        		
+        		" Name: "+ temp[4]+" <br>"+" Email : "+temp[temp.length-4]+"<br>"+" Mobile : "+temp[temp.length-3] ;	
         	});
         });
         
-        
+         <!-- to mark as read in database -->
         $(document).ready(function($){
         	$(".close").click(function(){
         		var item = document.getElementById("sub").innerHTML;
-        		//item = item.replace(/\s+/g,' ').trim();
         		serial = parseInt(item.split(" ")[2]);
-        		//document.write("/Inbox/viewnotf/read/"+item.split(" ")[2]);
-        /* 	item = item.replace(/\s+/g,' ').trim(); */
         		javascript:window.location.href="/Inbox/save/read/"+serial;
-        location.reload();
-        
+        		location.reload();
         	});
         });
-        	
+        
+	<!-- to approve in database when approve button is clicked -->
         $(document).ready(function($){
         	$(".approve").click(function(){
         		var item = document.getElementById("sub").innerHTML;
-        		//item = item.replace(/\s+/g,' ').trim();
         		name = item.split(" ")[8];
         		serial = parseInt(item.split(" ")[3]);
-        		//document.write("/Inbox/viewnotf/read/"+serial);
-        /* 	item = item.replace(/\s+/g,' ').trim(); */
         		javascript:window.location.href="/Inbox/save/approve/"+name;
         		javascript:window.location.href="/Inbox/save/read/"+serial;
-        location.reload();
-        
+        		location.reload();
         	});
         });
         
+	<!-- delete in database -->
         $(document).ready(function($){
         	$(".delete").click(function(){
         		var favorite = [];
@@ -184,11 +176,11 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 	javascript:window.location.href="/Inbox/save/delete/"+$(this).val();
                     favorite.push($(this).val());
                     });
-               // document.write(favorite.join(","));
                 location.reload();
         	});
-        	});
+        });
         
+	<!-- archive in database -->
         $(document).ready(function($){
         	$(".archive").click(function(){
         		var favorite = [];
@@ -196,36 +188,35 @@ if(request.getAttribute("adminDetail")==null){response.sendRedirect("/Inbox/empf
                 	javascript:window.location.href="/Inbox/save/archive/"+$(this).val();
                     favorite.push($(this).val());
                     });
-               // document.write(favorite.join(","));
                 location.reload();
         	});
-        	});
-        
+        });
+		
+        <!-- load archive page -->
         $(document).ready(function($){
         	$(".Archive").click(function(){
-        		//javascript:window.location.href="/Inbox/archive/";
         	location.reload();
         	});
         });
         
+	<!-- load all page -->
         $(document).ready(function($){
         	$(".All").click(function(){
-        		//document.write("hello");
         		javascript:window.location.href="/Inbox/save/viewnotf/";
-        	//location.reload();
         	});
         });
+		
+	<!-- load unread page -->
         $(document).ready(function($){
         	$(".Unread").click(function(){
         		javascript:window.location.href="/Inbox/save/unread/";
         	});
         });
+	
+	<!-- signout -->
         $(document).ready(function($) {
             $(".signout").click(function() {
-                //location.reload)();
                 javascript: window.location.href = "/Inbox/save/logout";
-
-                //document.write(adminDetail);
             });
         });
         	
