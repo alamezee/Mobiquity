@@ -44,6 +44,7 @@ enum level{ ca , na, sa}
 public static String maker;
 public static int adminid;
 public static String makerLevel;
+public static int testvar;
 
 /**
  * Generates Checker Notification for approval of new user to all Admins above and equal to that of maker admin.
